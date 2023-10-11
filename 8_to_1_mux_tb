@@ -1,0 +1,51 @@
+//100 Days of RTL Challenge//
+
+//Abilash P//
+
+//8:1 Multiplexer using data flow modeling//
+
+module mux_8_to_1_tb ();
+
+reg  I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2;
+wire Y;
+
+mux_8_to_1 DUT(.I0(I0), .I1(I1), .I2(I2), .I3(I3), .I4(I4), .I5(I5), .I6(I6), .I7(I7), .S0(S0), .S1(S1), .S2(S2), .Y(Y));
+
+
+integer i;
+
+task initial_values();
+begin
+   I0 = 0; I1 = 1; I2 = 0; I3 = 1; I4 = 1; I5 = 0; I6 = 1; I7 = 0;
+   $display("The input values are I0 = %b, I1 = %b, I2 = %b, I3 = %b, I4 = %b, I5 = %b, I6 = %b, I7 = %b",I0,I1,I2,I3,I4,I5,I6,I7);
+end
+endtask
+
+task change_values();
+begin
+   I0 = 1; I1 = 0; I2 = 1; I3 = 0; I4 = 0; I5 = 1; I6 = 0; I7 = 1;
+   $display("The changed input values are I0 = %b, I1 = %b, I2 = %b, I3 = %b, I4 = %b, I5 = %b, I6 = %b, I7 = %b",I0,I1,I2,I3,I4,I5,I6,I7);
+end
+endtask
+
+task select_lines();
+begin
+  for(i=0; i<8; i=i+1)
+  begin
+    {S2,S1,S0} = i;
+    #20;
+    $display("The select lines are S2 = %b, S1 = %b and S0 = %b",S2,S1,S0);
+    $display("The ouput value Y = %b", Y);
+  end
+end
+endtask
+
+initial
+begin
+  initial_values();
+  select_lines();
+  change_values();
+  select_lines();
+end
+
+endmodule
