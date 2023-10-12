@@ -1,0 +1,19 @@
+//100 Days of RTL Challenge//
+
+//Abilash P//
+
+//8:1 Multiplexer using 4:1 mux and 2:1 mux//
+
+module mux_8_to_1 (I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2,Y);
+
+input  I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2;
+output Y;
+
+wire w1, w2;
+
+mux_4_to_1 M1 (.I0(I0), .I1(I1), .I2(I2), .I3(I3), .S0(S0), .S1(S1), .Y(w1));
+mux_4_to_1 M2 (.I0(I4), .I1(I5), .I2(I6), .I3(I7), .S0(S0), .S1(S1), .Y(w2));
+
+mux_2_to_1 M3 (.I0(w1), .I1(w2), .S0(S2), .Y(Y));
+
+endmodule
