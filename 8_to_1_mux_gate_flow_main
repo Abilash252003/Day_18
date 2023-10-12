@@ -1,0 +1,80 @@
+//100 Days of RTL Challenge//
+
+//Abilash P//
+
+//8:1 Multiplexer using gate flow modeling or structural modeling(all are only two input gates)//
+
+module mux_8_to_1 (I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2,Y);
+
+input  I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2;
+output Y;
+
+wire p0,p1,p2;
+wire w1,w2,w3,w4,w5,w6,w7,w8;
+wire w10,w11,w21,w30,w31,w41,w50,w51,w61,w70,w71,w81;
+wire y11,y12,y21,y22;
+wire y1,y2;
+
+not n1 (p2,S2);
+not n2 (p1,S1);
+not n3 (p0,S0);
+
+and a1 (w10, p2, p1);
+and a2 (w11, p0, I0);
+and a3 (w1 ,w10,w11);
+
+and a4 (w21, S0, I1);
+and a5 (w2 ,w10,w21);
+
+and a6 (w30, p2, S1);
+and a7 (w31, p0, I2);
+and a8 (w3 ,w30,w31);
+
+and a9 (w41, S0, I3);
+and a10(w4 ,w30,w41);
+
+and a11(w50, S2, p1);
+and a12(w51, p0, I4);
+and a13(w5 ,w50,w51);
+
+and a14(w61, S0, I5);
+and a15(w6 ,w50,w61);
+
+and a16(w70, S2, S1);
+and a17(w71, p0, I6);
+and a18(w7 ,w70,w71);
+
+and a19(w81, S0, I7);
+and a20(w8 ,w70,w81);
+
+or  o1 (y11, w1, w2);
+or  o2 (y12, w3, w4);
+or  o3 (y21, w5, w6);
+or  o4 (y22, w7, w8);
+
+or  o5 (y1, y11,y12);
+or  o6 (y2, y21,y22);
+
+or  o7 (Y, y1, y2);
+endmodule
+
+
+///using multi input gates
+
+///wire p0, p1, p2;
+//wire t0, t1, t2, t3, t4, t5, t6, t7;
+
+//not n1 (p0,S0);
+//not n2 (p1,S1);
+//not n3 (p2,S2);
+
+//and a1 (t0,  p2,  p1,  p0, I0);
+//and a2 (t1,  p2,  p1,  S0, I1);
+//and a3 (t2,  p2,  S1,  p0, I2);
+//and a4 (t3,  p2,  S1,  S0, I3);
+//and a5 (t4,  S2,  p1,  p0, I4);
+//and a6 (t5,  S2,  p1,  S0, I5);
+//and a7 (t6,  S2,  S1,  p0, I6);
+//and a8 (t7,  S2,  S1,  S0, I7);
+
+//or  o1 (Y,t0, t1, t2, t3, t4, t5, t6, t7);
